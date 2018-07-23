@@ -62,11 +62,9 @@ public:
 	BLEAdvertising* getAdvertising();
 	void            setCallbacks(BLEServerCallbacks* pCallbacks);
 	void            startAdvertising();
-<<<<<<< HEAD
 	void            disconnectClient();
-=======
-	void 			removeService(BLEService *service);
->>>>>>> 7951347ed68313d75c367e1f2cce763cb56d1eb2
+	void 		removeService(BLEService *service);
+
 
 
 private:
