@@ -309,6 +309,27 @@ void BLEServer::registerApp() {
 } // registerApp
 
 
+void BLEServer::disconnectClient() {
+	ESP_LOGD(LOG_TAG, ">> disconnectClient. GATTS IF: %d. CONN ID: %d", m_gatts_if, m_connId);
+	if (m_gatts_if >= 0 and m_connId >= 0) {
+		esp_err_t result = ::esp_ble_gatts_close(m_gatts_if, m_connId);
+		if(result != ESP_OK)
+		{
+			ESP_LOGD(LOG_TAG, "DISCONNECTION FAILED CODE: %d", result);
+		}
+		else
+		{
+			ESP_LOGD(LOG_TAG,"DISCONNECTED");
+		}
+	}
+	else
+	{
+		ESP_LOGD(LOG_TAG,"NO VALID CLIENT");
+	}
+	ESP_LOGD(LOG_TAG, "<< disconnectClient");
+}
+
+
 /**
  * @brief Set the server callbacks.
  *
@@ -348,5 +369,6 @@ void BLEServerCallbacks::onDisconnect(BLEServer* pServer) {
 	ESP_LOGD("BLEServerCallbacks", "Device: %s", BLEDevice::toString().c_str());
 	ESP_LOGD("BLEServerCallbacks", "<< onDisconnect()");
 } // onDisconnect
+
 
 #endif // CONFIG_BT_ENABLED

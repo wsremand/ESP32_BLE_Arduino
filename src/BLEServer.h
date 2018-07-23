@@ -61,6 +61,7 @@ public:
 	BLEAdvertising* getAdvertising();
 	void            setCallbacks(BLEServerCallbacks* pCallbacks);
 	void            startAdvertising();
+	void            disconnectClient();
 
 
 private:
